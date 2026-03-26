@@ -4,7 +4,7 @@ from .models import Note
 
 class NoteForm(forms.Form):
     title = forms.CharField(label="Title", max_length=100)
-    description = forms.CharField(label="Description", widget=forms.Textarea)
+    description = forms.CharField(label="Description", widget=forms.Textarea, min_length=10)
 
     def save(self):
         title = self.cleaned_data['title']

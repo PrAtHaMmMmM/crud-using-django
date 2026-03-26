@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import Note
 from .forms import NoteForm
-
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     notes = Note.objects.all().order_by('-id')
@@ -18,10 +18,11 @@ def add_note(request):
             form.save()
             messages.success(request, 'Data added successfully!')
             return redirect('notes:index')
-        else:
-            form = NoteForm()
+    else:
+        form = NoteForm()
+
     return render(request, "notes/add.html", {
-        "form": NoteForm()
+        "form": form
     })
 
 
